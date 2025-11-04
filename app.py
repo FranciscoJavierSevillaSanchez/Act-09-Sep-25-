@@ -41,6 +41,27 @@ def index():
     alumnos = Alumno.query.all()
     return render_template('index.html', alumnos = alumnos)
 
+#Ruta /alumnos crear un nuevo alumno
+@app.route('/alumnos/new', methods=['GET','POST'])
+def create_alumno():
+    if request.method == 'POST':
+        #Agregar Alumno
+        no_control = request.form['no_control']
+        nombre = request.form['nombre']
+        ap_paterno = request.form['ap_paterno']
+        ap_materno = request.form['ap_materno']
+        semestre = request.form['semestre']
+
+        nvo_alumno = Alumno(no_control=no_control, nombre=nombre, ap_paterno=ap_paterno, ap_materno= ap_materno, semestre= semestre)
+
+        db.session.add(nvo_alumno)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+    
+    #Aqui sigue si es GET
+    return render_template('create_alumno.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
