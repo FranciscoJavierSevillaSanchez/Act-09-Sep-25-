@@ -62,6 +62,15 @@ def create_alumno():
     #Aqui sigue si es GET
     return render_template('create_alumno.html')
 
+#Eliminar alumno
+@app.route('/alumnos/delete/<string:no_control>')
+def delete_alumno(no_control):
+    alumno = Alumno.query.get(no_control)
+    if alumno:
+        db.session.delete(alumno)
+        db.session.commit()
+    return redirect(url_for('index'))
+
 
 #Actualizar alumno
 @app.route('/alumnos/update/<string:no_control>', methods=['GET','POST'])
