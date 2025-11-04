@@ -11,7 +11,7 @@
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
             <th>Semestre</th>
-           <!-- <th>Acciones</th>-->
+           <th>Acciones</th>
 
         </tr>
     </thead>
@@ -24,7 +24,8 @@
             <td>{{ alumno.ap_materno }}</td>
             <td>{{ alumno.semestre }}</td>
             <td>
-           
+           <a href="{{ url_for('update_alumno', no_control= alumno.no_control )}}" 
+                class="btn btn-warning">Actualizar</a> 
             </td> 
         </tr>
         {% endfor %}
